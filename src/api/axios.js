@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const API = axios.create({
-  baseURL: 'gym-cms-backend-production.up.railway.app'
+  baseURL: 'https://gym-cms-backend-production.up.railway.app/api'
 })
 
 API.interceptors.request.use((config) => {
