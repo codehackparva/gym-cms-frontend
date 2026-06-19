@@ -73,9 +73,9 @@ export default function Login() {
       </div>
 
       {/* Right Panel */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-16">
-        <div className="w-full max-w-md">
-          <div className="lg:hidden flex items-center gap-3 mb-10">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 lg:p-20">
+        <div className="w-full max-w-lg">
+          <div className="lg:hidden flex items-center gap-3 mb-12">
             <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
               <Zap size={20} className="text-black" />
             </div>
@@ -83,33 +83,33 @@ export default function Login() {
           </div>
 
           <div className="mb-12">
-            <h2 className="text-4xl font-bold text-white mb-3 tracking-tight">Sign in</h2>
-            <p className="text-zinc-400 text-base leading-relaxed">
+            <h2 className="text-5xl font-bold text-white mb-4 tracking-tight">Sign in</h2>
+            <p className="text-zinc-400 text-lg leading-relaxed">
               Welcome back! Please enter your details.
             </p>
           </div>
 
           {error && (
-            <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-5 py-4 rounded-xl mb-8 text-sm leading-relaxed">
+            <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-6 py-4 rounded-xl mb-8 text-base leading-relaxed">
               {error}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-8">
+          <form onSubmit={handleSubmit} className="space-y-7">
             <div>
-              <label className="text-zinc-400 text-xs block mb-2 uppercase tracking-widest font-semibold">
+              <label className="text-zinc-400 text-sm block mb-3 uppercase tracking-widest font-semibold">
                 Email Address
               </label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-zinc-900 border border-zinc-800 text-white px-5 py-4 rounded-xl focus:outline-none focus:border-orange-500/50 focus:ring-1 focus:ring-orange-500/20 transition-all text-base"
+                className="w-full bg-zinc-900 border border-zinc-800 text-white px-6 py-5 rounded-xl focus:outline-none focus:border-orange-500/50 focus:ring-1 focus:ring-orange-500/20 transition-all text-lg"
                 placeholder="Enter your email"
               />
             </div>
             <div>
-              <label className="text-zinc-400 text-xs block mb-2 uppercase tracking-widest font-semibold">
+              <label className="text-zinc-400 text-sm block mb-3 uppercase tracking-widest font-semibold">
                 Password
               </label>
               <div className="relative">
@@ -117,28 +117,28 @@ export default function Login() {
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-zinc-900 border border-zinc-800 text-white px-5 py-4 rounded-xl focus:outline-none focus:border-orange-500/50 focus:ring-1 focus:ring-orange-500/20 transition-all text-base pr-14"
+                  className="w-full bg-zinc-900 border border-zinc-800 text-white px-6 py-5 rounded-xl focus:outline-none focus:border-orange-500/50 focus:ring-1 focus:ring-orange-500/20 transition-all text-lg pr-16"
                   placeholder="Enter your password"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-5 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300"
+                  className="absolute right-6 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300"
                 >
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  {showPassword ? <EyeOff size={22} /> : <Eye size={22} />}
                 </button>
               </div>
             </div>
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-orange-500 hover:bg-orange-400 text-black font-bold py-4 rounded-xl transition-all text-base tracking-widest"
+              className="w-full bg-orange-500 hover:bg-orange-400 text-black font-bold py-5 rounded-xl transition-all text-lg tracking-widest mt-4"
             >
               {loading ? 'SIGNING IN...' : 'SIGN IN'}
             </button>
           </form>
 
-          <p className="text-zinc-500 text-base text-center mt-8 leading-relaxed">
+          <p className="text-zinc-500 text-lg text-center mt-10 leading-relaxed">
             Don't have an account?{' '}
             <Link to="/register" className="text-orange-400 hover:text-orange-300 font-semibold">
               Sign up
