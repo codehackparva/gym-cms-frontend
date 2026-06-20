@@ -13,6 +13,8 @@ export default function MemberView() {
   const [activeTab, setActiveTab] = useState('plans')
   const [logForm, setLogForm] = useState({ weight_kg: '', workout_done: false, notes: '' })
   const [message, setMessage] = useState('')
+  const [checkedInToday, setCheckedInToday] = useState(false)
+  const [checkinMessage, setCheckinMessage] = useState('')
 
   useEffect(() => { fetchPlans(); fetchProgress() }, [])
 
@@ -39,6 +41,23 @@ export default function MemberView() {
       fetchProgress()
       setTimeout(() => setMessage(''), 3000)
     } catch (err) { setMessage('Error logging progress') }
+  }
+
+  const handleCheckIn = async () => {
+    try {
+      await API.post('/checkin/check-in')
+      setCheckedInToday(true)
+      setCheckinMessage('Checked in successfully! 💪')
+      setTimeout(() => setCheckinMessage(''), 3000)
+    } catch (err) {
+      if (err.response?.data?.message === 'Already checked in today') {
+        setCheckedInToday(true)
+        setCheckinMessage('You already checked in today')
+      } else {
+        setCheckinMessage('Error checking in')
+      }
+      setTimeout(() => setCheckinMessage(''), 3000)
+    }
   }
 
   const handleLogout = () => { logout(); navigate('/login') }
@@ -105,6 +124,30 @@ export default function MemberView() {
         </div>
 
         <div className="p-8">
+          {/* Check-In Card */}
+          <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 mb-6 flex items-center justify-between">
+            <div>
+              <h3 className="text-white font-bold text-lg">Today's Check-In</h3>
+              <p className="text-zinc-400 text-sm">Tap in when you arrive at the gym</p>
+            </div>
+            <button
+              onClick={handleCheckIn}
+              disabled={checkedInToday}
+              className={`px-6 py-3 rounded-xl font-bold transition-all ${
+                checkedInToday
+                  ? 'bg-zinc-700 text-zinc-400 cursor-not-allowed'
+                  : 'bg-orange-500 hover:bg-orange-400 text-black'
+              }`}
+            >
+              {checkedInToday ? '✓ CHECKED IN' : 'CHECK IN'}
+            </button>
+          </div>
+          {checkinMessage && (
+            <div className="bg-orange-500/10 border border-orange-500/20 text-orange-400 px-4 py-3 rounded-xl mb-6 text-sm">
+              {checkinMessage}
+            </div>
+          )}
+
           {message && (
             <div className="bg-orange-500/10 border border-orange-500/30 text-orange-400 px-4 py-3 rounded-xl mb-6">
               {message}

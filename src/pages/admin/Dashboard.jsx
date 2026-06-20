@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
-import { Users, TrendingUp, Calendar, Plus, X, LogOut, Menu } from 'lucide-react'
+import { Users, TrendingUp, Calendar, Plus, X, LogOut, Menu, UserCheck } from 'lucide-react'
 import API from '../../api/axios'
 
 export default function AdminDashboard() {
@@ -16,8 +16,10 @@ export default function AdminDashboard() {
     full_name: '', email: '', password: '',
     phone: '', weight_kg: '', membership_expirey: ''
   })
+  const [checkins, setCheckins] = useState([])
+  const [checkinsLoading, setCheckinsLoading] = useState(true)
 
-  useEffect(() => { fetchMembers() }, [])
+  useEffect(() => { fetchMembers(); fetchCheckins() }, [])
 
   const fetchMembers = async () => {
     try {
@@ -26,6 +28,16 @@ export default function AdminDashboard() {
       setLoading(false)
     } catch (err) {
       setLoading(false)
+    }
+  }
+
+  const fetchCheckins = async () => {
+    try {
+      const res = await API.get('/checkin/today')
+      setCheckins(res.data)
+      setCheckinsLoading(false)
+    } catch (err) {
+      setCheckinsLoading(false)
     }
   }
 
@@ -67,6 +79,7 @@ export default function AdminDashboard() {
         <nav className="flex-1 p-4 space-y-1">
           {[
             { id: 'members', label: 'Members', icon: Users },
+            { id: 'attendance', label: 'Attendance', icon: UserCheck },
             { id: 'stats', label: 'Statistics', icon: TrendingUp },
             { id: 'billing', label: 'Billing', icon: Calendar },
           ].map(({ id, label, icon: Icon }) => (
@@ -109,7 +122,7 @@ export default function AdminDashboard() {
         <div className="bg-black border-b border-zinc-800 px-8 py-5 flex justify-between items-center">
           <div>
             <h2 className="font-display text-3xl tracking-wider text-white">
-              {activeTab === 'members' ? 'MEMBERS' : activeTab === 'stats' ? 'STATISTICS' : 'BILLING'}
+              {activeTab === 'members' ? 'MEMBERS' : activeTab === 'attendance' ? 'ATTENDANCE' : activeTab === 'stats' ? 'STATISTICS' : 'BILLING'}
             </h2>
             <p className="text-zinc-500 text-sm">{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
           </div>
@@ -135,13 +148,14 @@ export default function AdminDashboard() {
             {[
               { label: 'Total Members', value: members.length, color: 'orange' },
               { label: 'Active Members', value: activeCount, color: 'blue' },
-              { label: 'Expiring Soon', value: expiringCount, color: 'yellow' },
+              { label: 'Checked In Today', value: checkins.length, color: 'green' },
             ].map((stat) => (
               <div key={stat.label} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
                 <p className="text-zinc-400 text-sm mb-2">{stat.label}</p>
                 <p className={`font-display text-5xl ${
                   stat.color === 'orange' ? 'text-orange-400' :
-                  stat.color === 'blue' ? 'text-blue-400' : 'text-yellow-400'
+                  stat.color === 'blue' ? 'text-blue-400' :
+                  stat.color === 'green' ? 'text-green-400' : 'text-yellow-400'
                 }`}>{stat.value}</p>
               </div>
             ))}
@@ -189,6 +203,55 @@ export default function AdminDashboard() {
                           </span>
                         </td>
                         <td className="px-6 py-4 text-zinc-400">{member.membership_expirey}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+            </div>
+          )}
+
+          {/* Attendance Tab */}
+          {activeTab === 'attendance' && (
+            <div className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden">
+              <div className="px-6 py-4 border-b border-zinc-800 flex justify-between items-center">
+                <h3 className="font-bold text-white">Today's Check-Ins</h3>
+                <button
+                  onClick={fetchCheckins}
+                  className="text-orange-400 hover:text-orange-300 text-sm font-medium"
+                >
+                  Refresh
+                </button>
+              </div>
+              {checkinsLoading ? (
+                <div className="p-8 text-center text-zinc-500">Loading...</div>
+              ) : checkins.length === 0 ? (
+                <div className="p-12 text-center">
+                  <UserCheck size={48} className="text-zinc-600 mx-auto mb-4" />
+                  <p className="text-zinc-400">No one has checked in yet today.</p>
+                </div>
+              ) : (
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-zinc-800">
+                      <th className="px-6 py-4 text-left text-zinc-400 text-sm font-medium">Member</th>
+                      <th className="px-6 py-4 text-left text-zinc-400 text-sm font-medium">Check-In Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {checkins.map((c) => (
+                      <tr key={c.id} className="border-b border-zinc-800/50 hover:bg-zinc-800/50 transition-colors">
+                        <td className="px-6 py-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 bg-green-500/20 border border-green-500/30 rounded-full flex items-center justify-center text-green-400 text-sm font-bold">
+                              {c.members?.profiles?.full_name?.charAt(0)}
+                            </div>
+                            <span className="font-medium">{c.members?.profiles?.full_name}</span>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 text-zinc-400">
+                          {new Date(c.checked_in_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
