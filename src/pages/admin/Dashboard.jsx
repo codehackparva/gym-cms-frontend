@@ -18,6 +18,9 @@ export default function AdminDashboard() {
   })
   const [checkins, setCheckins] = useState([])
   const [checkinsLoading, setCheckinsLoading] = useState(true)
+  const [showRenewForm, setShowRenewForm] = useState(false)
+  const [renewingMember, setRenewingMember] = useState(null)
+  const [newExpiry, setNewExpiry] = useState('')
 
   useEffect(() => { fetchMembers(); fetchCheckins() }, [])
 
@@ -55,6 +58,30 @@ export default function AdminDashboard() {
       setTimeout(() => setMessage(''), 3000)
     } catch (err) {
       setMessage('Error adding member')
+    }
+  }
+
+  const openRenewForm = (member) => {
+    setRenewingMember(member)
+    setNewExpiry(member.membership_expirey)
+    setShowRenewForm(true)
+  }
+
+  const handleRenew = async (e) => {
+    e.preventDefault()
+    try {
+      await API.patch(`/admin/members/${renewingMember.id}`, {
+        membership_expirey: newExpiry,
+        weight_kg: renewingMember.weight_kg,
+        status: 'active'
+      })
+      setMessage('Membership renewed successfully!')
+      setShowRenewForm(false)
+      setRenewingMember(null)
+      fetchMembers()
+      setTimeout(() => setMessage(''), 3000)
+    } catch (err) {
+      setMessage('Error renewing membership')
     }
   }
 
@@ -217,7 +244,17 @@ export default function AdminDashboard() {
                             {isExpired(member) ? 'EXPIRED' : isExpiringSoon(member) ? 'EXPIRING SOON' : 'ACTIVE'}
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-zinc-400">{member.membership_expirey}</td>
+                        <td className="px-6 py-4">
+                          <div className="flex items-center gap-3">
+                            <span className="text-zinc-400">{member.membership_expirey}</span>
+                            <button
+                              onClick={() => openRenewForm(member)}
+                              className="text-orange-400 hover:text-orange-300 text-xs font-bold px-2 py-1 rounded-md border border-orange-500/30 hover:bg-orange-500/10 transition-colors"
+                            >
+                              RENEW
+                            </button>
+                          </div>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -402,6 +439,45 @@ export default function AdminDashboard() {
                 className="w-full bg-orange-500 hover:bg-orange-400 text-black font-bold py-3 rounded-xl transition-colors mt-2"
               >
                 ADD MEMBER
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Renew Membership Modal */}
+      {showRenewForm && renewingMember && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-zinc-900 border border-zinc-800 rounded-2xl w-full max-w-md">
+            <div className="flex justify-between items-center p-6 border-b border-zinc-800">
+              <h3 className="font-display text-2xl text-white tracking-wider">RENEW MEMBERSHIP</h3>
+              <button onClick={() => setShowRenewForm(false)} className="text-zinc-400 hover:text-white">
+                <X size={24} />
+              </button>
+            </div>
+            <form onSubmit={handleRenew} className="p-6 space-y-4">
+              <div>
+                <p className="text-zinc-400 text-sm mb-1">Member</p>
+                <p className="text-white font-bold text-lg">{renewingMember.profiles?.full_name}</p>
+              </div>
+              <div>
+                <p className="text-zinc-400 text-sm mb-1">Current Expiry</p>
+                <p className="text-red-400 font-medium">{renewingMember.membership_expirey}</p>
+              </div>
+              <div>
+                <label className="text-zinc-400 text-sm block mb-1">New Expiry Date</label>
+                <input
+                  type="date"
+                  value={newExpiry}
+                  onChange={(e) => setNewExpiry(e.target.value)}
+                  className="w-full bg-zinc-800 border border-zinc-700 text-white px-4 py-2.5 rounded-xl focus:outline-none focus:border-orange-500"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-orange-500 hover:bg-orange-400 text-black font-bold py-3 rounded-xl transition-colors mt-2"
+              >
+                CONFIRM RENEWAL
               </button>
             </form>
           </div>
