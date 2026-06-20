@@ -60,13 +60,25 @@ export default function AdminDashboard() {
 
   const handleLogout = () => { logout(); navigate('/login') }
 
-  const activeCount = members.filter(m => m.status === 'active').length
-  const expiringCount = members.filter(m => {
-    const expiry = new Date(m.membership_expirey)
+  // Single source of truth for membership status — always derived from the
+  // actual expiry date, never trusts a stale stored "status" field.
+  const isExpired = (member) => {
+    if (!member.membership_expirey) return true
+    const expiry = new Date(member.membership_expirey)
     const now = new Date()
-    const diff = (expiry - now) / (1000 * 60 * 60 * 24)
-    return diff < 30
-  }).length
+    return expiry < now
+  }
+
+  const isExpiringSoon = (member) => {
+    if (!member.membership_expirey || isExpired(member)) return false
+    const expiry = new Date(member.membership_expirey)
+    const now = new Date()
+    const diffDays = (expiry - now) / (1000 * 60 * 60 * 24)
+    return diffDays <= 30
+  }
+
+  const activeCount = members.filter(m => !isExpired(m)).length
+  const expiringCount = members.filter(m => isExpiringSoon(m)).length
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white flex">
@@ -144,10 +156,11 @@ export default function AdminDashboard() {
           )}
 
           {/* Stats Cards */}
-          <div className="grid grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-4 gap-6 mb-8">
             {[
               { label: 'Total Members', value: members.length, color: 'orange' },
               { label: 'Active Members', value: activeCount, color: 'blue' },
+              { label: 'Expiring Soon', value: expiringCount, color: 'yellow' },
               { label: 'Checked In Today', value: checkins.length, color: 'green' },
             ].map((stat) => (
               <div key={stat.label} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
@@ -195,11 +208,13 @@ export default function AdminDashboard() {
                         <td className="px-6 py-4 font-bold text-white">{member.weight_kg} kg</td>
                         <td className="px-6 py-4">
                           <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                            member.status === 'active'
-                              ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30'
-                              : 'bg-red-500/20 text-red-400 border border-red-500/30'
+                            isExpired(member)
+                              ? 'bg-red-500/20 text-red-400 border border-red-500/30'
+                              : isExpiringSoon(member)
+                              ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
+                              : 'bg-orange-500/20 text-orange-400 border border-orange-500/30'
                           }`}>
-                            {member.status?.toUpperCase()}
+                            {isExpired(member) ? 'EXPIRED' : isExpiringSoon(member) ? 'EXPIRING SOON' : 'ACTIVE'}
                           </span>
                         </td>
                         <td className="px-6 py-4 text-zinc-400">{member.membership_expirey}</td>
@@ -291,8 +306,12 @@ export default function AdminDashboard() {
                       <td className="px-6 py-4 text-zinc-400">{member.join_date}</td>
                       <td className="px-6 py-4 text-zinc-400">{member.membership_expirey}</td>
                       <td className="px-6 py-4">
-                        <span className="bg-orange-500/20 text-orange-400 border border-orange-500/30 px-3 py-1 rounded-full text-xs font-bold">
-                          PAID
+                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${
+                          isExpired(member)
+                            ? 'bg-red-500/20 text-red-400 border border-red-500/30'
+                            : 'bg-orange-500/20 text-orange-400 border border-orange-500/30'
+                        }`}>
+                          {isExpired(member) ? 'OVERDUE' : 'PAID'}
                         </span>
                       </td>
                     </tr>
