@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IRON PULSE | Command Center Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#383940",
+                    "outline-variant": "#584237",
+                    "secondary-fixed": "#e4e1e9",
+                    "on-tertiary-container": "#323235",
+                    "on-tertiary": "#303033",
+                    "surface-container-low": "#1a1b22",
+                    "surface-tint": "#ffb690",
+                    "error": "#ffb4ab",
+                    "primary-fixed-dim": "#ffb690",
+                    "on-secondary-fixed-variant": "#47464c",
+                    "on-tertiary-fixed": "#1b1b1e",
+                    "secondary-container": "#49484e",
+                    "on-background": "#e2e1eb",
+                    "surface-container-high": "#282a31",
+                    "tertiary-fixed": "#e4e1e6",
+                    "on-surface": "#e2e1eb",
+                    "on-error-container": "#ffdad6",
+                    "on-surface-variant": "#e0c0b1",
+                    "inverse-primary": "#9d4300",
+                    "warning-gold": "#fbbf24",
+                    "surface-border": "#27272a",
+                    "on-primary": "#552100",
+                    "primary-container": "#f97316",
+                    "info-blue": "#60a5fa",
+                    "surface": "#12131a",
+                    "background": "#12131a",
+                    "inverse-surface": "#e2e1eb",
+                    "on-secondary-container": "#bab7be",
+                    "inverse-on-surface": "#2f3037",
+                    "error-container": "#93000a",
+                    "on-secondary": "#303036",
+                    "secondary-fixed-dim": "#c8c5cd",
+                    "on-error": "#690005",
+                    "surface-container": "#1e1f26",
+                    "on-secondary-fixed": "#1b1b20",
+                    "tertiary": "#c8c5ca",
+                    "outline": "#a78b7d",
+                    "secondary": "#c8c5cd",
+                    "on-primary-container": "#582200",
+                    "on-primary-fixed": "#341100",
+                    "surface-container-lowest": "#0c0e14",
+                    "error-ruby": "#f87171",
+                    "tertiary-container": "#9c9a9e",
+                    "surface-container-highest": "#33343c",
+                    "on-tertiary-fixed-variant": "#47464a",
+                    "surface-variant": "#33343c",
+                    "primary": "#ffb690",
+                    "success-neon": "#4ade80",
+                    "surface-dim": "#12131a",
+                    "primary-fixed": "#ffdbca"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "page-margin": "2rem",
+                    "card-gap": "1.5rem",
+                    "input-px": "1rem",
+                    "section-stack": "3rem",
+                    "input-py": "0.75rem",
+                    "container-padding": "1.25rem"
+            },
+            "fontFamily": {
+                    "display-hero": ["Bebas Neue"],
+                    "action-text": ["Bebas Neue"],
+                    "display-lg-mobile": ["Bebas Neue"],
+                    "body-md": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "display-lg": ["Bebas Neue"],
+                    "body-lg": ["Inter"],
+                    "heading-2": ["Bebas Neue"]
+            },
+            "fontSize": {
+                    "display-hero": ["72px", {"lineHeight": "1.0", "letterSpacing": "0.02em", "fontWeight": "700"}],
+                    "action-text": ["20px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "1.1", "letterSpacing": "0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.0", "letterSpacing": "0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "heading-2": ["30px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0c0e14;
+            color: #e2e1eb;
+            overflow: hidden;
+        }
+        .glass-morphism {
+            background: rgba(18, 19, 26, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(249, 115, 22, 0.15);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(249, 115, 22, 0.05);
+        }
+        .orange-glow-border {
+            box-shadow: 0 0 15px rgba(249, 115, 22, 0.2);
+        }
+        .text-outline {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+            color: transparent;
+        }
+        .vertical-text {
+            writing-mode: vertical-lr;
+            transform: rotate(180deg);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased min-h-screen relative">
+<!-- Background Layer -->
+<div class="fixed inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center scale-105 opacity-60" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDDFss5ORzwyZW00-LQS-sXt1Hl3X_HHD494KkVV1cNt2iEVk7FC8HBwsiN_87eIrhCnMRvpTS5duv7NkDqzQSaVegpn__wUI2UpnUJQMX58qeacdDGmcVJR42BcEmMWkYNyz5vUpV6ZZzuzFaX1nFWVQRxo_X9MoV1m6ohBYeyNGlsmaCA1WofXKtUCWu_79w_3CYH5hUFBCpqqyD_JqvMJoyicm5E5HKir0RqVtHhJn4RZUw1d8vCBEo9Ih7q6O78tPwtyvntSWix");'></div>
+<div class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+</div>
+<!-- Main Content Grid -->
+<main class="relative z-10 min-h-screen flex items-stretch">
+<!-- Left Side: Editorial Watermark & Stats -->
+<div class="hidden lg:flex flex-1 flex-col justify-between p-12">
+<!-- Branding Header -->
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center shadow-lg shadow-primary-container/20">
+<span class="material-symbols-outlined text-white" style='font-variation-settings: "FILL" 1;'>fitness_center</span>
+</div>
+<span class="font-display-lg text-display-lg tracking-tighter text-white">GYM <span class="text-primary-container">CMS</span></span>
+</div>
+<!-- Massive Watermark -->
+<div class="absolute left-0 top-1/2 -translate-y-1/2 pointer-events-none select-none opacity-30">
+<h1 class="text-[220px] font-display-hero text-outline leading-none vertical-text tracking-widest">GYM CMS</h1>
+</div>
+<!-- Stats Footer -->
+<div class="flex gap-12 items-center">
+<div class="flex flex-col">
+<span class="font-display-lg text-4xl text-white">4.9</span>
+<span class="font-label-caps text-[10px] tracking-widest text-on-surface-variant/60 uppercase">Global Rating</span>
+</div>
+<div class="w-px h-8 bg-surface-border"></div>
+<div class="flex flex-col">
+<span class="font-display-lg text-4xl text-white">12K+</span>
+<span class="font-label-caps text-[10px] tracking-widest text-on-surface-variant/60 uppercase">Active Elite</span>
+</div>
+<div class="w-px h-8 bg-surface-border"></div>
+<div class="flex flex-col">
+<span class="font-display-lg text-4xl text-white">0%</span>
+<span class="font-label-caps text-[10px] tracking-widest text-on-surface-variant/60 uppercase">Excuses Allowed</span>
+</div>
+</div>
+</div>
+<!-- Right Side: Login Panel -->
+<div class="w-full lg:w-[500px] xl:w-[600px] flex items-center justify-center p-6 md:p-12">
+<div class="w-full max-w-md glass-morphism rounded-2xl p-8 md:p-10 relative overflow-hidden" style="background: rgba(18, 19, 26, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(249, 115, 22, 0.3); box-shadow: 0 0 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(249, 115, 22, 0.1);">
+<!-- Top Accents -->
+<div class="absolute top-0 right-0 w-32 h-1 bg-primary-container"></div>
+<header class="mb-10 text-center md:text-left">
+<div class="lg:hidden flex items-center justify-center gap-3 mb-8">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style='font-variation-settings: "FILL" 1;'>fitness_center</span>
+</div>
+<span class="font-display-lg text-display-lg tracking-tighter text-white">GYM <span class="text-primary-container">CMS</span></span>
+</div>
+<h2 class="font-heading-2 text-4xl text-white tracking-tight">WELCOME BACK, COMMANDER</h2>
+<p class="text-on-surface-variant/70 mt-2 font-body-md">Authorization required to access the tactical dashboard.</p>
+</header>
+<form class="space-y-6" onsubmit="return false;">
+<!-- Email -->
+<div class="space-y-2">
+<label class="font-label-caps text-xs tracking-widest text-on-surface-variant/70" for="email">IDENTIFICATION (EMAIL)</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/40 group-focus-within:text-primary-container transition-colors">person</span>
+<input class="w-full bg-surface-container-lowest/50 border border-surface-border rounded-lg py-4 pl-12 pr-4 text-white focus:outline-none focus:ring-1 focus:ring-primary-container focus:border-primary-container transition-all placeholder:text-on-surface-variant/20" id="email" placeholder="commander@ironpulse.io" type="email"/>
+</div>
+</div>
+<!-- Password -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="font-label-caps text-xs tracking-widest text-on-surface-variant/70" for="password">SECURE KEY (PASSWORD)</label>
+<a class="text-[10px] font-bold text-primary-container hover:text-white transition-colors" href="#">FORGOT ACCESS KEY?</a>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/40 group-focus-within:text-primary-container transition-colors">key</span>
+<input class="w-full bg-surface-container-lowest/50 border border-surface-border rounded-lg py-4 pl-12 pr-12 text-white focus:outline-none focus:ring-1 focus:ring-primary-container focus:border-primary-container transition-all placeholder:text-on-surface-variant/20" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant/40 hover:text-white transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember & CTA -->
+<div class="flex items-center gap-2 pb-2">
+<input class="w-4 h-4 rounded border-surface-border bg-black text-primary-container focus:ring-primary-container/30" id="remember" type="checkbox"/>
+<label class="font-label-caps text-[10px] cursor-pointer select-none text-on-surface-variant/70" for="remember">TRUST THIS STATION FOR 30 DAYS</label>
+</div>
+<button class="w-full bg-primary-container text-white font-action-text text-xl py-4 rounded-lg orange-glow-border hover:bg-primary-container/90 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-3 group" type="submit">
+                        INITIALIZE SYSTEM ACCESS
+                        <span class="material-symbols-outlined group-hover:rotate-12 transition-transform">bolt</span>
+</button>
+</form>
+<!-- Social Authentication -->
+<footer class="mt-10 pt-6 border-t border-surface-border text-center">
+<p class="text-[13px] text-on-surface-variant/50">
+                        NEW RECRUIT? 
+                        <a class="text-primary-container font-bold hover:underline underline-offset-4 ml-1" href="#">JOIN THE ELITE FORCE</a>
+</p>
+</footer>
+</div>
+</div>
+</main>
+<!-- Interactive Glow Layer -->
+<div class="fixed w-[600px] h-[600px] bg-primary-container/5 rounded-full blur-[150px] pointer-events-none z-0 transform -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-1000" id="cursor-glow" style="left: 257px; top: 1013px; opacity: 1;"></div>
+<script>
+        const glow = document.getElementById('cursor-glow');
+        document.addEventListener('mousemove', (e) => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+            glow.style.opacity = '1';
+        });
+
+        // Form Focus Effects
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.closest('.relative').classList.add('orange-glow-border');
+            });
+            input.addEventListener('blur', () => {
+                input.closest('.relative').classList.remove('orange-glow-border');
+            });
+        });
+    </script>
+</body></html>

@@ -1,35 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
 @import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap');
+@theme {
+  --color-surface: #12131a;
+  --color-surface-dim: #12131a;
+  --color-surface-bright: #383940;
+  --color-surface-container-lowest: #0c0e14;
+  --color-surface-container-low: #1a1b22;
+  --color-surface-container: #1e1f26;
+  --color-surface-container-high: #282a31;
+  --color-surface-container-highest: #33343c;
+  --color-on-surface: #e2e1eb;
+  --color-on-surface-variant: #e0c0b1;
+  --color-inverse-surface: #e2e1eb;
+  --color-inverse-on-surface: #2f3037;
+  --color-outline: #a78b7d;
+  --color-outline-variant: #584237;
+  --color-surface-tint: #ffb690;
+  --color-primary: #ffb690;
+  --color-on-primary: #552100;
+  --color-primary-container: #f97316;
+  --color-on-primary-container: #582200;
+  --color-inverse-primary: #9d4300;
+  --color-secondary: #c8c5cd;
+  --color-on-secondary: #303036;
+  --color-secondary-container: #49484e;
+  --color-on-secondary-container: #bab7be;
+  --color-tertiary: #c8c5ca;
+  --color-on-tertiary: #303033;
+  --color-tertiary-container: #9c9a9e;
+  --color-on-tertiary-container: #323235;
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+  --color-primary-fixed: #ffdbca;
+  --color-primary-fixed-dim: #ffb690;
+  --color-on-primary-fixed: #341100;
+  --color-on-primary-fixed-variant: #783200;
+  --color-secondary-fixed: #e4e1e9;
+  --color-secondary-fixed-dim: #c8c5cd;
+  --color-on-secondary-fixed: #1b1b20;
+  --color-on-secondary-fixed-variant: #47464c;
+  --color-tertiary-fixed: #e4e1e6;
+  --color-tertiary-fixed-dim: #c8c5ca;
+  --color-on-tertiary-fixed: #1b1b1e;
+  --color-on-tertiary-fixed-variant: #47464a;
+  --color-background: #12131a;
+  --color-on-background: #e2e1eb;
+  --color-surface-variant: #33343c;
+  --color-success-neon: #4ade80;
+  --color-error-ruby: #f87171;
+  --color-warning-gold: #fbbf24;
+  --color-info-blue: #60a5fa;
+  --color-surface-border: #27272a;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  --border-radius-DEFAULT: 0.25rem;
+  --border-radius-lg: 0.5rem;
+  --border-radius-xl: 0.75rem;
+  --border-radius-full: 9999px;
+
+  --spacing-page-margin: 2rem;
+  --spacing-card-gap: 1.5rem;
+  --spacing-input-px: 1rem;
+  --spacing-section-stack: 3rem;
+  --spacing-input-py: 0.75rem;
+  --spacing-container-padding: 1.25rem;
+
+  --font-display-hero: "Bebas Neue", sans-serif;
+  --font-action-text: "Bebas Neue", sans-serif;
+  --font-display-lg-mobile: "Bebas Neue", sans-serif;
+  --font-body-md: "Inter", sans-serif;
+  --font-label-caps: "Inter", sans-serif;
+  --font-display-lg: "Bebas Neue", sans-serif;
+  --font-body-lg: "Inter", sans-serif;
+  --font-heading-2: "Bebas Neue", sans-serif;
+  --font-display: "Bebas Neue", sans-serif;
 }
+
+
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #0a0a0f;
-  color: #ffffff;
-  font-size: 16px;
-  line-height: 1.6;
-  letter-spacing: 0.01em;
+  background-color: #0c0e14;
+  color: #e2e1eb;
 }
 
-.font-display {
-  font-family: 'Bebas Neue', cursive;
-  letter-spacing: 0.05em;
+/* Custom UI Utilities from Stitch */
+.glass-morphism {
+  background: rgba(18, 19, 26, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(249, 115, 22, 0.15);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(249, 115, 22, 0.05);
 }
 
-input, button, select, textarea {
-  font-size: 15px !important;
-  letter-spacing: 0.02em;
+.orange-glow-border {
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.2);
 }
 
-label {
-  font-size: 14px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  font-weight: 600;
+.text-outline {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+  color: transparent;
+}
+
+.vertical-text {
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+.glass-card {
+  background: rgba(24, 24, 27, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(39, 39, 42, 1);
+}
+
+.glow-accent {
+  box-shadow: 0 0 30px 2px rgba(249, 115, 22, 0.15);
+}
+
+.glass-panel {
+  background: rgba(24, 24, 27, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid #27272a;
+}
+
+.orange-glow {
+  box-shadow: 0 0 20px rgba(249, 115, 22, 0.15);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #12131a;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 10px;
+}
+
+.chart-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw 2s ease-out forwards;
+}
+
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Autofill fixes */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #ffffff;
+  -webkit-box-shadow: 0 0 0px 1000px #18181b inset;
+  transition: background-color 5000s ease-in-out 0s;
 }

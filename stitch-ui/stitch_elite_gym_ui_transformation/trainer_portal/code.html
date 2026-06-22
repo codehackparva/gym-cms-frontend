@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>APEX FORGE | Trainer Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#9d4300",
+                        "primary-container": "#f97316",
+                        "surface-container-lowest": "#0c0e14",
+                        "on-tertiary-fixed-variant": "#47464a",
+                        "on-surface-variant": "#e0c0b1",
+                        "on-surface": "#e2e1eb",
+                        "secondary-container": "#49484e",
+                        "background": "#12131a",
+                        "on-primary": "#552100",
+                        "primary-fixed": "#ffdbca",
+                        "on-tertiary-container": "#323235",
+                        "surface-dim": "#12131a",
+                        "tertiary-fixed": "#e4e1e6",
+                        "on-secondary-fixed": "#1b1b20",
+                        "inverse-on-surface": "#2f3037",
+                        "primary-fixed-dim": "#ffb690",
+                        "tertiary": "#c8c5ca",
+                        "surface-border": "#27272a",
+                        "surface-container-high": "#282a31",
+                        "warning-gold": "#fbbf24",
+                        "on-tertiary-fixed": "#1b1b1e",
+                        "error": "#ffb4ab",
+                        "surface-container-highest": "#33343c",
+                        "on-tertiary": "#303033",
+                        "on-primary-fixed-variant": "#783200",
+                        "surface-variant": "#33343c",
+                        "secondary-fixed": "#e4e1e9",
+                        "surface": "#12131a",
+                        "on-error": "#690005",
+                        "on-error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#c8c5cd",
+                        "surface-container-low": "#1a1b22",
+                        "success-neon": "#4ade80",
+                        "on-background": "#e2e1eb",
+                        "on-primary-fixed": "#341100",
+                        "outline": "#a78b7d",
+                        "secondary": "#c8c5cd",
+                        "on-secondary-fixed-variant": "#47464c",
+                        "on-primary-container": "#582200",
+                        "surface-bright": "#383940",
+                        "error-container": "#93000a",
+                        "outline-variant": "#584237",
+                        "on-secondary-container": "#bab7be",
+                        "info-blue": "#60a5fa",
+                        "on-secondary": "#303036",
+                        "surface-tint": "#ffb690",
+                        "inverse-surface": "#e2e1eb",
+                        "tertiary-fixed-dim": "#c8c5ca",
+                        "primary": "#ffb690",
+                        "error-ruby": "#f87171",
+                        "surface-container": "#1e1f26",
+                        "tertiary-container": "#9c9a9e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-stack": "3rem",
+                        "container-padding": "1.25rem",
+                        "input-px": "1rem",
+                        "input-py": "0.75rem",
+                        "card-gap": "1.5rem",
+                        "page-margin": "2rem"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "action-text": ["Bebas Neue"],
+                        "body-lg": ["Inter"],
+                        "display-hero": ["Bebas Neue"],
+                        "heading-2": ["Bebas Neue"],
+                        "display-lg-mobile": ["Bebas Neue"],
+                        "display-lg": ["Bebas Neue"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "action-text": ["20px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-hero": ["72px", {"lineHeight": "1.0", "letterSpacing": "0.02em", "fontWeight": "700"}],
+                        "heading-2": ["30px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                        "display-lg-mobile": ["36px", {"lineHeight": "1.1", "letterSpacing": "0.02em", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "1.0", "letterSpacing": "0.02em", "fontWeight": "700"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(24, 24, 27, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid #27272a;
+        }
+        .orange-glow {
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.15);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #12131a;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 10px;
+        }
+        .chart-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw 2s ease-out forwards;
+        }
+        @keyframes draw {
+            to { stroke-dashoffset: 0; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden">
+<!-- Fixed Side Navigation -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low border-r border-surface-border flex flex-col justify-between py-page-margin z-50">
+<div class="px-6">
+<div class="mb-10">
+<h1 class="font-display-lg text-primary-container tracking-tighter leading-none">APEX FORGE</h1>
+<p class="font-label-caps text-[10px] text-on-surface-variant tracking-[0.3em] mt-1 opacity-60">ELITE PERFORMANCE</p>
+</div>
+<nav class="space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-150 text-secondary opacity-60 hover:bg-surface-container-high hover:text-primary active:scale-95" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md uppercase tracking-widest text-[12px]">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-150 text-primary-container font-bold border-r-4 border-primary-container bg-primary-container/10 active:scale-95" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md uppercase tracking-widest text-[12px]">Members</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-150 text-secondary opacity-60 hover:bg-surface-container-high hover:text-primary active:scale-95" href="#">
+<span class="material-symbols-outlined">fitness_center</span>
+<span class="font-body-md uppercase tracking-widest text-[12px]">Trainers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-150 text-secondary opacity-60 hover:bg-surface-container-high hover:text-primary active:scale-95" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-body-md uppercase tracking-widest text-[12px]">Schedule</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-150 text-secondary opacity-60 hover:bg-surface-container-high hover:text-primary active:scale-95" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-body-md uppercase tracking-widest text-[12px]">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-150 text-secondary opacity-60 hover:bg-surface-container-high hover:text-primary active:scale-95" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md uppercase tracking-widest text-[12px]">Settings</span>
+</a>
+</nav>
+<button class="w-full mt-10 bg-primary-container text-on-primary font-action-text py-3 rounded-xl orange-glow hover:brightness-110 transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>NEW SESSION</span>
+</button>
+</div>
+<div class="px-6 border-t border-surface-border pt-6">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-error/70 hover:bg-error/10 hover:text-error transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md uppercase tracking-widest text-[12px]">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen flex flex-col relative overflow-hidden">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-md border-b border-surface-border shadow-sm flex justify-between items-center px-container-padding h-20">
+<div class="flex items-center gap-8">
+<h2 class="font-heading-2 text-primary-container tracking-widest">TRAINER PORTAL</h2>
+<nav class="hidden md:flex gap-6">
+<a class="text-primary border-b-2 border-primary pb-2 font-label-caps uppercase" href="#">Members</a>
+<a class="text-on-surface-variant font-label-caps uppercase hover:text-primary transition-all" href="#">Plans</a>
+<a class="text-on-surface-variant font-label-caps uppercase hover:text-primary transition-all" href="#">Assign</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<input class="bg-surface-container-low border border-surface-border rounded-full px-5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-container/30 transition-all w-64" placeholder="Search athletes..." type="text"/>
+<span class="material-symbols-outlined absolute right-4 top-2 text-on-surface-variant text-[20px]">search</span>
+</div>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-10 w-10 rounded-full border-2 border-primary-container p-0.5 overflow-hidden">
+<img class="w-full h-full object-cover rounded-full" data-alt="A portrait of a professional fitness trainer with a determined expression, wearing sleek modern black athletic gear, set against a dark, moody gym background with dramatic orange rim lighting to highlight his physique. High contrast, cinematic quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj-ADu840cr8l8t3_ES_cR6pD-2JTDBs1bOj27NLAN36o5-uSrrWj8-JVJxzyRY9grbe6cs1rnSCW6liW1fgH46OI62FrWpXDLl9kK0a1B_qSvUivY_dsEYuWI_xQQCfCBpCuGHE92RM_y4p8BpEuj4ae7-NVe6yvVc2ON9xIFTqkVFojf9Xc17TxzQXiLqCkyhpiEJeZgHxrHVzEGXvGGOY9La0AsdeXc1AnJUQ2BT1gzeduOfARTRnPQYQ_exuAdg16hsQIgXR2L"/>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="p-page-margin flex-grow custom-scrollbar overflow-y-auto">
+<!-- Dashboard Stats Row -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-card-gap mb-8">
+<div class="bg-surface-container-low border border-surface-border rounded-2xl p-6 hover:border-primary-container/50 transition-colors group">
+<p class="font-label-caps text-on-surface-variant mb-2">ACTIVE CLIENTS</p>
+<div class="flex items-end justify-between">
+<h3 class="font-display-lg text-primary leading-none">24</h3>
+<span class="text-success-neon flex items-center text-sm font-bold"><span class="material-symbols-outlined text-[18px]">trending_up</span> 12%</span>
+</div>
+</div>
+<div class="bg-surface-container-low border border-surface-border rounded-2xl p-6 hover:border-primary-container/50 transition-colors group">
+<p class="font-label-caps text-on-surface-variant mb-2">COMPLETED PLANS</p>
+<div class="flex items-end justify-between">
+<h3 class="font-display-lg text-on-surface leading-none">156</h3>
+<span class="text-on-surface-variant/40 text-sm">Target: 200</span>
+</div>
+</div>
+<div class="bg-surface-container-low border border-surface-border rounded-2xl p-6 hover:border-primary-container/50 transition-colors group">
+<p class="font-label-caps text-on-surface-variant mb-2">AVG. PROGRESS</p>
+<div class="flex items-end justify-between">
+<h3 class="font-display-lg text-on-surface leading-none">8.2<span class="text-2xl opacity-50">%</span></h3>
+<span class="text-success-neon flex items-center text-sm font-bold"><span class="material-symbols-outlined text-[18px]">arrow_upward</span> 0.5</span>
+</div>
+</div>
+<div class="bg-surface-container-low border border-surface-border rounded-2xl p-6 hover:border-primary-container/50 transition-colors group">
+<p class="font-label-caps text-on-surface-variant mb-2">UPCOMING SESSIONS</p>
+<div class="flex items-end justify-between">
+<h3 class="font-display-lg text-warning-gold leading-none">05</h3>
+<span class="text-on-surface-variant/40 text-sm">Today</span>
+</div>
+</div>
+</div>
+<!-- Members Table Section -->
+<section class="bg-surface-container-low border border-surface-border rounded-2xl overflow-hidden mb-8">
+<div class="p-6 border-b border-surface-border flex justify-between items-center">
+<h4 class="font-heading-2 text-on-surface text-xl">MANAGED MEMBERS</h4>
+<button class="bg-primary-container/10 border border-primary-container/30 text-primary-container font-action-text px-4 py-2 rounded-lg hover:bg-primary-container/20 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                        FILTER
+                    </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container/50 text-on-surface-variant font-label-caps text-[10px] uppercase tracking-widest border-b border-surface-border">
+<tr>
+<th class="px-6 py-4">Athlete</th>
+<th class="px-6 py-4">Plan Status</th>
+<th class="px-6 py-4">Last Check-in</th>
+<th class="px-6 py-4">Compliance</th>
+<th class="px-6 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-border">
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg bg-surface-container-highest overflow-hidden border border-surface-border">
+<img class="w-full h-full object-cover" data-alt="A close-up muscular professional athlete with visible sweat and intensity, focused on a workout. Shot in high-contrast cinematic lighting with deep blacks and vibrant orange highlights, 8k resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoH0tlf5NbfYx_-yDb8J1WHiud6f_4n_Js5YvuprZtUflntfZI9Pg7VKEoo32RtJCcz7qgNluElOy_amstPC3haEOVfWRfg7ZBk3tYHB0lYkyouMvxlMy8yO73bzSQ_lDk8zWaBR8__LP_v0krfuSinKh3GHdLgzilOVJOLSc2rdR3pL-DojlywOjb_gq91jiWqmBqKYiwK3Ub-IT3ekOk_5O4AUvH026tNvdztx1pGSGphtKT-KMf1yga1KVSLvpKGk9lMqYC2dUa"/>
+</div>
+<div>
+<p class="font-bold text-on-surface">Marcus Chen</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">Hypertrophy Phase 2</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-success-neon/10 text-success-neon text-[10px] font-bold rounded-full uppercase tracking-tighter">Active</span>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">2 hours ago</td>
+<td class="px-6 py-4">
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[92%]"></div>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="bg-surface-container-highest text-on-surface px-4 py-2 rounded-lg text-xs font-bold hover:bg-primary-container hover:text-on-primary transition-all active:scale-95" onclick="toggleModal('memberModal')">VIEW LOGS</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg bg-surface-container-highest overflow-hidden border border-surface-border">
+<img class="w-full h-full object-cover" data-alt="A focused female sprinter in mid-stride, showcasing intense power and form. Dark atmospheric studio setting with neon orange lighting streaks, emphasizing high-performance and modern sports aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8B8rKjfhmOktQgNgnjM1O6Q1mUOEEAAKehsopszFFxhKwchotw6CffUEzZY72iddYs81zbVBI3qMNm00uUW024VElAFTWL3XssPpXB3Xht1Qvt0EbvdA_eAvQOaFR1Da9hwZxMlJsb981EljKA7Cgz0VqlIAoOJ1u40zyHclJzazijadb-H43pNJaf_c0C_AXaSAu3MFmIcYxmzsH-QdYFqzwN-cQWHXKK1IIw4ekpgL9D9lH-VN9ob60AcwEwqobybI8dMlJMH_F"/>
+</div>
+<div>
+<p class="font-bold text-on-surface">Sarah Jenkins</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">Explosive Power</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-primary-container/10 text-primary-container text-[10px] font-bold rounded-full uppercase tracking-tighter">Rest Day</span>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">Yesterday</td>
+<td class="px-6 py-4">
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[78%]"></div>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="bg-surface-container-highest text-on-surface px-4 py-2 rounded-lg text-xs font-bold hover:bg-primary-container hover:text-on-primary transition-all active:scale-95">VIEW LOGS</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg bg-surface-container-highest overflow-hidden border border-surface-border">
+<img class="w-full h-full object-cover" data-alt="A heavy lifter performing a deadlift with immense focus. The environment is industrial, dark zinc textures, with glowing orange backlighting. High-performance elite fitness visual style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJ8incaEJLp-rtMbD2bcPu92VfJBgU0XoYpHH9PMGnpfUs_SvLqRkblTUEUSvvgkq_YLGRWIwuaj4IlLSUhdzsk5Ef-LI5LSh4lxNHxtTTGyEFyPpjCvNszqoUtkl2YXf-AEGhcxWNpN_LfZJtWptzWkp9r87UeE1t9GTMXTm5Jz5mYxOBqSETjAM6glZ5SKOxu9s9ZH8PDXA-mibQu9z1AgpA-vRGHHboURGT8nk66Kk8cksX2QagW7J7ByzEwCdDDCqfEhBRWYFR"/>
+</div>
+<div>
+<p class="font-bold text-on-surface">David Miller</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">Strength Foundational</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-error-ruby/10 text-error-ruby text-[10px] font-bold rounded-full uppercase tracking-tighter">Off Track</span>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">3 days ago</td>
+<td class="px-6 py-4">
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-error-ruby h-full w-[45%]"></div>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="bg-surface-container-highest text-on-surface px-4 py-2 rounded-lg text-xs font-bold hover:bg-primary-container hover:text-on-primary transition-all active:scale-95">VIEW LOGS</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</main>
+<!-- Member Detail Modal (Shown as open for the example) -->
+<div class="fixed inset-0 z-[60] flex items-center justify-center p-6 transition-opacity duration-300" id="memberModal">
+<!-- Backdrop -->
+<div class="absolute inset-0 bg-background/90 backdrop-blur-sm" onclick="toggleModal('memberModal')"></div>
+<!-- Modal Content -->
+<div class="relative w-full max-w-5xl glass-panel rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row h-[870px] animate-in fade-in zoom-in duration-300">
+<!-- Left Panel: Profile & Activity -->
+<div class="w-full md:w-80 border-r border-surface-border p-8 bg-surface-container-low/50 flex flex-col">
+<div class="text-center mb-8">
+<div class="h-24 w-24 rounded-2xl mx-auto mb-4 border border-primary-container p-1 bg-surface-container">
+<img class="w-full h-full object-cover rounded-xl" data-alt="Headshot of a focused male athlete, Marcus Chen, looking directly at the camera with determination. Elite fitness aesthetic, dark obsidian palette, high-contrast orange edge lighting, sleek professional athlete vibes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCavaoYwyTY5cLboMZtLXOruXtvB6DjiT798GvzKNtEGpqPljEm2YHongNmVaJSDmpllhf1vaJq8dnoRWUf3JwR7TWhdiI9FG53g9CFmGLDjpRlrYZRqdkv4QqPcaiHOkJST7SsiaYwY0jofzjGnAgh4tvyTIvfYm8hmozUA6WplmkOW0nX2tMBLR-E0vPb2wUbVez1A-xTCwuVlu_njPMdhTr5xicmDwCAUqrz5489NlFHFaP2DKoLdS27WQDCmgeVmahS5BGafPD9"/>
+</div>
+<h3 class="font-heading-2 text-2xl text-on-surface">MARCUS CHEN</h3>
+<p class="font-label-caps text-primary-container text-xs tracking-widest uppercase">ELITE TIER MEMBER</p>
+</div>
+<div class="space-y-6 flex-grow overflow-y-auto custom-scrollbar pr-2">
+<div>
+<p class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-[0.2em] mb-3">RECENT ACTIVITY</p>
+<ul class="space-y-4">
+<li class="flex gap-3 text-xs">
+<span class="material-symbols-outlined text-success-neon text-sm">check_circle</span>
+<div>
+<p class="text-on-surface font-semibold">Chest & Tris Completed</p>
+<p class="text-on-surface-variant opacity-60">11:42 AM Today</p>
+</div>
+</li>
+<li class="flex gap-3 text-xs">
+<span class="material-symbols-outlined text-info-blue text-sm">history</span>
+<div>
+<p class="text-on-surface font-semibold">Weight Logged: 184lbs</p>
+<p class="text-on-surface-variant opacity-60">06:15 AM Today</p>
+</div>
+</li>
+<li class="flex gap-3 text-xs">
+<span class="material-symbols-outlined text-warning-gold text-sm">error</span>
+<div>
+<p class="text-on-surface font-semibold">Missed Nutrition Log</p>
+<p class="text-on-surface-variant opacity-60">Yesterday</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="pt-6 border-t border-surface-border">
+<p class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-[0.2em] mb-3">BIO-METRICS</p>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container p-3 rounded-xl border border-surface-border">
+<p class="text-[10px] text-on-surface-variant">BMI</p>
+<p class="text-lg font-bold text-primary">24.2</p>
+</div>
+<div class="bg-surface-container p-3 rounded-xl border border-surface-border">
+<p class="text-[10px] text-on-surface-variant">BF %</p>
+<p class="text-lg font-bold text-primary">12.5%</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Panel: Data Visualization -->
+<div class="flex-grow p-8 overflow-y-auto custom-scrollbar bg-surface-container-lowest/40">
+<div class="flex justify-between items-center mb-8">
+<h4 class="font-heading-2 text-2xl">PERFORMANCE OVERVIEW</h4>
+<button class="text-on-surface-variant hover:text-on-surface" onclick="toggleModal('memberModal')">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Weight Progress Line Chart (SVG Implementation) -->
+<div class="bg-surface-container border border-surface-border rounded-2xl p-6 mb-8">
+<div class="flex justify-between items-center mb-6">
+<p class="font-label-caps text-xs tracking-widest text-on-surface-variant uppercase">Weight Progress (LBS)</p>
+<div class="flex gap-4">
+<span class="text-[10px] flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary-container"></span> Actual</span>
+<span class="text-[10px] flex items-center gap-1 opacity-40"><span class="w-2 h-2 rounded-full bg-on-surface"></span> Target</span>
+</div>
+</div>
+<div class="relative h-48 w-full">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 1000 200">
+<!-- Grid Lines -->
+<line stroke="#27272a" stroke-width="1" x1="0" x2="1000" y1="0" y2="0"></line>
+<line stroke="#27272a" stroke-width="1" x1="0" x2="1000" y1="50" y2="50"></line>
+<line stroke="#27272a" stroke-width="1" x1="0" x2="1000" y1="100" y2="100"></line>
+<line stroke="#27272a" stroke-width="1" x1="0" x2="1000" y1="150" y2="150"></line>
+<line stroke="#27272a" stroke-width="1" x1="0" x2="1000" y1="200" y2="200"></line>
+<!-- Target Line -->
+<path d="M0,180 L200,170 L400,165 L600,160 L800,158 L1000,155" fill="none" opacity="0.2" stroke="#e2e1eb" stroke-dasharray="8 4" stroke-width="2"></path>
+<!-- Progress Path -->
+<path class="chart-path" d="M0,180 L200,185 L400,175 L600,165 L800,162 L1000,150" fill="none" stroke="#f97316" stroke-linecap="round" stroke-width="4"></path>
+<!-- Highlight Points -->
+<circle cx="0" cy="180" fill="#f97316" r="4"></circle>
+<circle cx="200" cy="185" fill="#f97316" r="4"></circle>
+<circle cx="400" cy="175" fill="#f97316" r="4"></circle>
+<circle cx="600" cy="165" fill="#f97316" r="4"></circle>
+<circle cx="800" cy="162" fill="#f97316" r="4"></circle>
+<circle cx="1000" cy="150" fill="#f97316" r="6">
+<animate attributename="r" dur="2s" repeatcount="indefinite" values="6;8;6"></animate>
+</circle>
+</svg>
+<div class="flex justify-between mt-4 text-[10px] text-on-surface-variant font-label-caps opacity-60">
+<span>WK 01</span>
+<span>WK 04</span>
+<span>WK 08</span>
+<span>WK 12</span>
+<span>CURRENT</span>
+</div>
+</div>
+</div>
+<!-- Assigned Plans Grid -->
+<div>
+<div class="flex justify-between items-center mb-6">
+<p class="font-label-caps text-xs tracking-widest text-on-surface-variant uppercase">ACTIVE ASSIGNED PLANS</p>
+<button class="text-primary-container text-[10px] font-bold tracking-widest hover:underline">+ ADD PLAN</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container/60 border border-surface-border rounded-xl p-4 flex justify-between items-center hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-primary-container/20 rounded-lg">
+<span class="material-symbols-outlined text-primary-container">fitness_center</span>
+</div>
+<div>
+<p class="font-bold text-sm">Hypertrophy P2</p>
+<p class="text-[10px] text-on-surface-variant">4 Weeks remaining</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/40">chevron_right</span>
+</div>
+<div class="bg-surface-container/60 border border-surface-border rounded-xl p-4 flex justify-between items-center hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-info-blue/20 rounded-lg">
+<span class="material-symbols-outlined text-info-blue">restaurant</span>
+</div>
+<div>
+<p class="font-bold text-sm">Leaning Macros</p>
+<p class="text-[10px] text-on-surface-variant">Daily check-in active</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/40">chevron_right</span>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-8 border-t border-surface-border flex gap-4">
+<button class="flex-grow bg-primary-container text-on-primary font-action-text py-3 rounded-xl transition-all hover:brightness-110 active:scale-95">MODIFY CURRENT PLAN</button>
+<button class="px-6 border border-surface-border rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-all">MESSAGE ATHLETE</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+        // Micro-interaction: Modal Toggle Logic
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modal.querySelector('.relative').classList.add('animate-in', 'fade-in', 'zoom-in');
+                }, 10);
+            } else {
+                modal.classList.add('opacity-0');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // Initialize state
+        document.addEventListener('DOMContentLoaded', () => {
+            // Uncomment the line below to have modal open by default for demo
+            // document.getElementById('memberModal').classList.remove('hidden');
+        });
+    </script>
+</body></html>
