@@ -58,9 +58,9 @@ export default function Login() {
         {/* Left Side: Editorial Watermark & Stats */}
         <div className="hidden lg:flex flex-1 flex-col justify-between p-12 relative overflow-hidden">
           {/* Branding Header */}
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center shadow-lg shadow-primary-container/20">
-              <span className="material-symbols-outlined text-white" style={{ fontVariationSettings: '"FILL" 1' }}>fitness_center</span>
+          <div className="flex items-center gap-4">
+            <div className="w-16 h-16 bg-primary-container rounded-xl flex items-center justify-center shadow-lg shadow-primary-container/20">
+              <span className="material-symbols-outlined text-white text-4xl" style={{ fontVariationSettings: '"FILL" 1' }}>fitness_center</span>
             </div>
             <span className="font-display-lg text-display-lg tracking-tighter text-white uppercase">
               GYM <span className="text-primary-container">CMS</span>
@@ -68,7 +68,7 @@ export default function Login() {
           </div>
 
           {/* Massive Watermark */}
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 pointer-events-none select-none opacity-30">
+          <div className="absolute left-12 top-1/2 -translate-y-1/2 pointer-events-none select-none opacity-30">
             <h1 className="text-[200px] font-display-hero text-outline leading-none vertical-text tracking-widest uppercase">
               GYM CMS
             </h1>
@@ -100,11 +100,11 @@ export default function Login() {
             <div className="absolute top-0 right-0 w-32 h-1 bg-primary-container"></div>
             
             <header className="mb-10 text-center lg:text-left">
-              <div className="lg:hidden flex items-center justify-center gap-3 mb-8">
-                <div className="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center">
-                  <span className="material-symbols-outlined text-white" style={{ fontVariationSettings: '"FILL" 1' }}>fitness_center</span>
+              <div className="lg:hidden flex items-center justify-center gap-4 mb-8">
+                <div className="w-14 h-14 bg-primary-container rounded-xl flex items-center justify-center">
+                  <span className="material-symbols-outlined text-white text-3xl" style={{ fontVariationSettings: '"FILL" 1' }}>fitness_center</span>
                 </div>
-                <span className="font-display-lg text-display-lg tracking-tighter text-white">GYM <span className="text-primary-container">CMS</span></span>
+                <span className="font-display-lg text-display-lg-mobile tracking-tighter text-white">GYM <span className="text-primary-container">CMS</span></span>
               </div>
               <h2 className="font-heading-2 text-4xl text-white tracking-tight">WELCOME BACK, COMMANDER</h2>
               <p className="text-on-surface-variant/70 mt-2 font-body-md">Authorization required to access the tactical dashboard.</p>

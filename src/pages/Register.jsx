@@ -77,7 +77,7 @@ export default function Register() {
       >
         {/* Brand Header */}
         <div className="text-center mb-8">
-          <h1 className="font-display-lg text-display-lg text-primary tracking-tighter leading-none mb-2">IRON PULSE</h1>
+          <h1 className="font-display-lg text-display-lg-mobile md:text-display-lg text-primary tracking-tighter leading-none mb-2">IRON PULSE</h1>
           <p className="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.3em] text-[10px]">Elite Performance CMS</p>
         </div>
 

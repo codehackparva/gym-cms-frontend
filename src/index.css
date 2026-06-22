@@ -78,6 +78,9 @@
   --font-body-lg: "Inter", sans-serif;
   --font-heading-2: "Bebas Neue", sans-serif;
   --font-display: "Bebas Neue", sans-serif;
+
+  --text-display-lg: 3.5rem;
+  --text-display-lg-mobile: 2.5rem;
 }
 
 
